@@ -264,47 +264,51 @@ function kicker(slide, text, color = GOLD) {
     isTextBox: true, margin: 0,
   });
 
+  // titles are pre-broken with explicit line breaks so wrapping never
+  // depends on a viewer's own word-wrap (some mobile Office viewers don't
+  // reflow text inside shapes the way LibreOffice/PowerPoint desktop do)
   const grid = [
-    ["Медленный, широкий темп", "Величие и спокойствие — город никуда не торопится"],
-    ["Мощные духовые и медь", "Гранит, камень, монументальная архитектура"],
-    ["Торжественный, гимнический характер", "Праздник и гордость, парадный облик города"],
-    ["Плавные, широкие фразы", "Нева, простор, открытые панорамы"],
-    ["Минорные оттенки", "Строгость и память о пережитом — прежде всего о блокаде"],
+    ["Медленный,\nширокий темп", "Величие и спокойствие — город никуда не торопится"],
+    ["Мощные духовые\nи медь", "Гранит, камень, монументальная архитектура"],
+    ["Торжественный,\nгимнический характер", "Праздник и гордость, парадный облик города"],
+    ["Плавные,\nширокие фразы", "Нева, простор, открытые панорамы"],
+    ["Минорные\nоттенки", "Строгость и память о пережитом — прежде всего о блокаде"],
   ];
-  const colW = 3.75, colGap = 0.25, rowH = 1.55, top = 2.25;
+  const colW = 3.75, colGap = 0.25, rowH = 1.85, top = 2.2, padX = 0.22;
+  const innerW = colW - padX * 2;
   grid.forEach((g, i) => {
     const col = i % 3, row = Math.floor(i / 3);
     const x = 0.7 + col * (colW + colGap);
-    const y = top + row * (rowH + 0.25);
+    const y = top + row * (rowH + 0.2);
     s.addShape("roundRect", {
       x, y, w: colW, h: rowH, rectRadius: 0.08,
       fill: { color: ICE }, line: { type: "none" },
     });
-    circleTag(s, x + 0.25, y + 0.22, 0.42, "♪", { fill: NAVY, color: "FFFFFF", fontSize: 16 });
+    circleTag(s, x + padX, y + 0.2, 0.4, "♪", { fill: NAVY, color: "FFFFFF", fontSize: 15 });
     s.addText(g[0], {
-      x: x + 0.25, y: y + 0.75, w: colW - 0.5, h: 0.4,
-      fontFace: FONT_HEAD, fontSize: 12.5, bold: true, color: NAVY_D,
+      x: x + padX, y: y + 0.66, w: innerW, h: 0.62,
+      fontFace: FONT_HEAD, fontSize: 12, bold: true, color: NAVY_D, lineSpacingMultiple: 1.08,
       isTextBox: true, margin: 0,
     });
     s.addText(g[1], {
-      x: x + 0.25, y: y + 1.1, w: colW - 0.5, h: 0.55,
-      fontFace: FONT_BODY, fontSize: 10.5, color: GREY, lineSpacingMultiple: 1.1,
+      x: x + padX, y: y + 1.32, w: innerW, h: 0.48,
+      fontFace: FONT_BODY, fontSize: 10, color: GREY, lineSpacingMultiple: 1.15,
       isTextBox: true, margin: 0,
     });
   });
 
   // last cell as a callout with the Bronze Horseman fact
-  const lastX = 0.7 + 2 * (colW + colGap), lastY = top + 1 * (rowH + 0.25);
+  const lastX = 0.7 + 2 * (colW + colGap), lastY = top + 1 * (rowH + 0.2);
   s.addShape("roundRect", {
     x: lastX, y: lastY, w: colW, h: rowH, rectRadius: 0.08,
     fill: { color: NAVY_D }, line: { type: "none" },
   });
   s.addText([
-    { text: "«Медный всадник»\n", options: { bold: true, color: GOLD, fontSize: 12.5, breakLine: true } },
-    { text: "Гимн родился из балета о памятнике Петру I — теме основания города силой воли, на пустом месте.", options: { color: "EAF0F7", fontSize: 10.5 } },
+    { text: "«Медный всадник»\n", options: { bold: true, color: GOLD, fontSize: 12, breakLine: true } },
+    { text: "Гимн родился из балета о памятнике Петру I — теме основания города силой воли, на пустом месте.", options: { color: "EAF0F7", fontSize: 10 } },
   ], {
-    x: lastX + 0.25, y: lastY + 0.18, w: colW - 0.5, h: rowH - 0.36,
-    fontFace: FONT_BODY, lineSpacingMultiple: 1.15, isTextBox: true, margin: 0,
+    x: lastX + padX, y: lastY + 0.2, w: innerW, h: rowH - 0.4,
+    fontFace: FONT_BODY, lineSpacingMultiple: 1.2, isTextBox: true, margin: 0,
   });
 
   s.addNotes(
