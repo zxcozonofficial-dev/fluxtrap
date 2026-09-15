@@ -20,7 +20,7 @@ function newPres() {
 }
 
 const p = newPres();
-p.author = "Никита, Тимур, Денис, Даниил";
+p.author = "Творческий проект по музыке";
 p.title = "Гимн моего города — Санкт-Петербург";
 
 const W = 13.33, H = 7.5;
@@ -90,19 +90,14 @@ function kicker(slide, text, color = GOLD) {
     isTextBox: true, margin: 0,
   });
 
-  // authors row
-  const names = ["Никита", "Тимур", "Денис", "Даниил"];
-  const cardW = 2.5, gap = 0.35, totalW = names.length * cardW + (names.length - 1) * gap;
+  // part-number row
+  const partCount = 4;
+  const cardW = 2.5, gap = 0.35, totalW = partCount * cardW + (partCount - 1) * gap;
   let startX = (W - totalW) / 2;
-  names.forEach((n, i) => {
+  for (let i = 0; i < partCount; i++) {
     const x = startX + i * (cardW + gap);
-    circleTag(s, x + cardW / 2 - 0.32, 4.85, 0.64, String(i + 1));
-    s.addText(n, {
-      x, y: 5.6, w: cardW, h: 0.4, align: "center",
-      fontFace: FONT_BODY, fontSize: 14, bold: true, color: "FFFFFF",
-      isTextBox: true, margin: 0,
-    });
-  });
+    circleTag(s, x + cardW / 2 - 0.32, 5.05, 0.64, String(i + 1));
+  }
 
   s.addText("Санкт-Петербург", {
     x: 0, y: H - 0.75, w: W, h: 0.4, align: "center",
@@ -121,7 +116,7 @@ function kicker(slide, text, color = GOLD) {
   // left panel
   s.addShape("rect", { x: 0, y: 0, w: 4.6, h: H, fill: { color: NAVY_D }, line: { type: "none" } });
   circleTag(s, 0.7, 0.6, 0.7, "1", { fontSize: 22 });
-  s.addText("Никита", { x: 1.6, y: 0.62, w: 2.6, h: 0.5, fontFace: FONT_HEAD, fontSize: 20, bold: true, color: "FFFFFF", isTextBox: true, margin: 0 });
+  s.addText("Часть 1", { x: 1.6, y: 0.62, w: 2.6, h: 0.5, fontFace: FONT_HEAD, fontSize: 20, bold: true, color: "FFFFFF", isTextBox: true, margin: 0 });
   s.addText("вступление · цель · задачи", { x: 1.6, y: 1.08, w: 2.8, h: 0.35, fontFace: FONT_BODY, fontSize: 11, italic: true, color: "9FB3CC", isTextBox: true, margin: 0 });
 
   s.addText("Мы слышим гимн города чаще, чем замечаем: на вокзале, на празднике, в День города.\n\nНо кто его написал и о чём он — знают единицы.", {
@@ -189,7 +184,6 @@ function kicker(slide, text, color = GOLD) {
   s.background = { color: ICE };
   kicker(s, "теория · часть 1");
   circleTag(s, 11.9, 0.5, 0.55, "2", { fontSize: 16 });
-  s.addText("Тимур", { x: 9.9, y: 0.55, w: 1.9, h: 0.45, align: "right", fontFace: FONT_BODY, fontSize: 13, bold: true, color: NAVY_D, isTextBox: true, margin: 0 });
 
   s.addText("Как рождался гимн", {
     x: 0.7, y: 0.85, w: 9, h: 0.7,
@@ -258,7 +252,6 @@ function kicker(slide, text, color = GOLD) {
   s.background = { color: CARD };
   kicker(s, "теория · часть 2");
   circleTag(s, 11.9, 0.5, 0.55, "3", { fontSize: 16 });
-  s.addText("Денис", { x: 9.9, y: 0.55, w: 1.9, h: 0.45, align: "right", fontFace: FONT_BODY, fontSize: 13, bold: true, color: NAVY_D, isTextBox: true, margin: 0 });
 
   s.addText("Музыка как портрет города", {
     x: 0.7, y: 0.85, w: 9.5, h: 0.7,
@@ -328,7 +321,6 @@ function kicker(slide, text, color = GOLD) {
   s.background = { color: ICE };
   kicker(s, "практика");
   circleTag(s, 11.9, 0.5, 0.55, "4", { fontSize: 16 });
-  s.addText("Даниил", { x: 9.7, y: 0.55, w: 2.1, h: 0.45, align: "right", fontFace: FONT_BODY, fontSize: 13, bold: true, color: NAVY_D, isTextBox: true, margin: 0 });
 
   s.addText("Что говорят сами петербуржцы", {
     x: 0.7, y: 0.85, w: 9.5, h: 0.7,
